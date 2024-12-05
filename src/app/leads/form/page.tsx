@@ -45,6 +45,13 @@ const LeadForm = () => {
     }
   };
 
+  const handleReset = () => {
+    setSubmitted(false);
+    setData({});
+    setErrorMessage(undefined);
+    setErrors([]);
+  };
+
   const renderers = [
     ...materialRenderers,
     {
@@ -56,43 +63,47 @@ const LeadForm = () => {
 
   return (
     <>
-      <header className="flex bg-[#DADDAC] h-[360px]">
-        <div className="w-auto bg-[url('/assets/images/immigration-assessment-header-bg.webp')] bg-no-repeat bg-cover aspect-[413/714]"></div>
-        <div className="flex flex-col items-start justify-center h-full mx-6 space-y-4 lg:mx-11">
+      <header className="relative h-[360px] bg-[#DADDAC] bg-[url('/assets/images/immigration-assessment-header-bg.webp')] bg-left bg-no-repeat bg-contain mb-8 flex items-center">
+        <div className="flex flex-col items-start justify-center h-full ml-auto mr-auto px-[240px]">
           <img
             src="/assets/images/alma-header-logo.svg"
             alt="Alma Logo"
-            className="w-auto"
+            className="mb-10"
           />
-          <h1 className="text-4xl lg:text-6xl font-black tracking-tighter leading-tight">
-            Get An Assessment Of Your Immigration Case
+          <h1 className="text-5xl font-black">
+            Get An Assessment
+            <br />
+            Of Your Immigration Case
           </h1>
         </div>
       </header>
       <div className="p-6 max-w-lg mx-auto">
         {!isMounted ? (
-          <div className="flex items-center justify-center">
-            <div className="text-xl font-semibold">Loading...</div>
+          <div className="flex items-center justify-center h-full">
+            <div className="text-2xl font-bold mt-10">Loading...</div>
           </div>
         ) : submitted ? (
-          <div className="flex flex-col items-center">
-            <h2 className="text-2xl font-semibold tracking-normal leading-snug mb-5">
-              Thank You
-            </h2>
-            <p className="text-base font-normal tracking-normal leading-relaxed mb-5">
+          <div className="flex flex-col items-center text-center">
+            <h2 className="text-2xl font-semibold mb-5">Thank You</h2>
+            <p className="text-base font-normal mb-5">
               Your information was submitted to our team of immigration
               attorneys. Expect an email from hello@tryalma.ai.
             </p>
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={handleReset}>
               Go Back to Homepage
             </Button>
           </div>
         ) : (
           <>
-            <h2 className="text-2xl font-semibold tracking-normal leading-snug mb-5">
+            <img
+              src="/assets/images/icon-info.webp"
+              alt="Info Icon"
+              className="h-[46px] mx-auto mb-4"
+            />
+            <h2 className="text-xl font-bold text-center mb-5">
               Want to understand your visa options?
             </h2>
-            <p className="text-base font-normal tracking-normal leading-relaxed mb-5">
+            <p className="text-sm font-bold text-center leading-tight mb-10">
               Submit the form below and our team of experienced attorneys will
               review your information and send a preliminary assessment of your
               case based on your goals.
